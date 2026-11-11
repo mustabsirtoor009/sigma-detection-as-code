@@ -44,4 +44,7 @@ My first version of the log-clearing rule used the pre-v19 ATT&CK tags (`attack.
 
 ## Example output: Splunk queries
 
-The pipeline converts all eight rules into Splunk searches on every run:
+The pipeline converts all eight rules into Splunk searches on every run: 
+
+<img width="1513" height="686" alt="image" src="https://github.com/user-attachments/assets/c4a3d6fe-e60f-416a-bcaf-ecda982740de" />
+
