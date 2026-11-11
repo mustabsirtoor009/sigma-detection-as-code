@@ -8,7 +8,13 @@ Detection rules written in the Sigma format, mapped to MITRE ATT&CK v19, and val
 2. The pipeline runs `sigma check` and fails the build on any error or issue, including invalid MITRE ATT&CK tags.
 3. The pipeline converts every rule to Splunk queries, which proves the rules can be deployed to a real SIEM.
 
-## Detection coverage
+## Detection coverage 
+
+| Local User Account Created With Net Command | T1136.001 Create Account: Local Account | Persistence | Medium |
+| User Account Created (Security log, event 4720) | T1136.001 Create Account: Local Account | Persistence | Low |
+| Registry Run Key Added With Reg.exe | T1547.001 Registry Run Keys / Startup Folder | Persistence | Medium |
+| Volume Shadow Copies Deleted | T1490 Inhibit System Recovery | Impact | High |
+| Windows Defender Real-Time Protection Disabled With PowerShell | T1685 Disable or Modify Tools | Defense Impairment | High |
 
 | Rule | ATT&CK technique | Tactic | Level |
 |---|---|---|---|
