@@ -1,0 +1,21 @@
+title: User Account Created
+id: a08124bf-54f8-4aba-a615-1160ea3443e8
+status: experimental
+description: Detects creation of a user account through Windows Security event 4720. Together with the net command rule, it covers account creation from two different data sources.
+references:
+    - https://attack.mitre.org/techniques/T1136/001/
+author: mustabsirtoor009
+date: 2026-11-11
+tags:
+    - attack.persistence
+    - attack.t1136.001
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4720
+    condition: selection
+falsepositives:
+    - Normal account provisioning by administrators and identity management systems
+level: low
