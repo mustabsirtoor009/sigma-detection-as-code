@@ -1,0 +1,20 @@
+name: Validate Sigma Rules
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install sigma-cli and the Splunk backend
+        run: |
+          pipx install sigma-cli
+          sigma plugin install splunk
+      - name: Show available targets and pipelines
+        run: |
+          sigma list targets
+          sigma list pipelines
+      - name: Validate rules (quality gate)
+        run: sigma check rules/
+      - name: Convert rules to Splunk queries
+        run: sigma convert -t splunk -p splunk_windows rules/
