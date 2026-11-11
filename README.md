@@ -37,6 +37,11 @@ My first version of the log-clearing rule used the pre-v19 ATT&CK tags (`attack.
 
 - Elasticsearch conversion is not included. Installing the Elasticsearch plugin pulled in pySigma 1.5.1, which conflicts with the pySigma 2.x that sigma-cli 4.0.0 and the Splunk plugin require, and the two cannot be installed together.
 - The pipeline installs the latest sigma-cli and Splunk plugin on each run. Versions are not pinned yet.
+- sigma-cli 4.0.0 and the Splunk backend 3.0.0 are pinned to exact versions, so updating them is a manual change.
 
 - The rules are written for Windows logs and have not been tested against live log data yet.
 - False-positive notes come from the rule logic, not from a production environment.
+
+## Example output: Splunk queries
+
+The pipeline converts all eight rules into Splunk searches on every run:
