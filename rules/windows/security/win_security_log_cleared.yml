@@ -1,0 +1,21 @@
+title: Windows Security Event Log Cleared
+id: 2b4dcb37-49d7-43fe-9b57-cb21ef82ba5f
+status: experimental
+description: Detects clearing of the Windows Security event log (event ID 1102). Attackers clear logs to remove evidence of their activity.
+references:
+    - https://attack.mitre.org/techniques/T1070/001/
+author: mustabsirtoor009
+date: 2026-11-11
+tags:
+    - attack.defense-evasion
+    - attack.t1070.001
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 1102
+    condition: selection
+falsepositives:
+    - Administrators clearing the log during maintenance
+level: high
