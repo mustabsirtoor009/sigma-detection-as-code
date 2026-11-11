@@ -27,7 +27,10 @@ Detection rules written in the Sigma format, mapped to MITRE ATT&CK v19, and val
 
 My first version of the log-clearing rule used the pre-v19 ATT&CK tags (`attack.defense-evasion` and `attack.t1070.001`). MITRE ATT&CK v19 retired the Defense Evasion tactic, split it into Stealth and Defense Impairment, and moved Clear Windows Event Logs to T1685.005. The validator flagged both tags, the strict gate failed the build, and the build passed once I updated the rule.
 
-## Limitations
+## Limitations 
+
+- Elasticsearch conversion is not included. Installing the Elasticsearch plugin pulled in pySigma 1.5.1, which conflicts with the pySigma 2.x that sigma-cli 4.0.0 and the Splunk plugin require, and the two cannot be installed together.
+- The pipeline installs the latest sigma-cli and Splunk plugin on each run. Versions are not pinned yet.
 
 - The rules are written for Windows logs and have not been tested against live log data yet.
 - False-positive notes come from the rule logic, not from a production environment.
