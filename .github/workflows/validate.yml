@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Install sigma-cli and the Splunk backend
+      - name: Install pinned sigma-cli and Splunk backend
         run: |
-          pipx install sigma-cli
-          sigma plugin install splunk
+          pipx install sigma-cli==4.0.0
+          pipx inject sigma-cli pysigma-backend-splunk==3.0.0
       - name: Show installed Sigma packages
         run: pipx runpip sigma-cli list | grep -i sigma
       - name: Validate rules (quality gate)
