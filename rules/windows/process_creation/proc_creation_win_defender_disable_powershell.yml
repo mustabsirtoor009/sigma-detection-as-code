@@ -1,0 +1,31 @@
+title: Windows Defender Real-Time Protection Disabled With PowerShell
+id: ae448fd9-2d0d-4243-95b5-4cc930ec2df0
+status: experimental
+description: Detects PowerShell turning off Windows Defender real-time monitoring with Set-MpPreference. Attackers disable security tools before running their malware.
+references:
+    - https://attack.mitre.org/techniques/T1685/
+author: mustabsirtoor009
+date: 2026-11-11
+tags:
+    - attack.defense-impairment
+    - attack.t1685
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_cmd:
+        CommandLine|contains|all:
+            - 'Set-MpPreference'
+            - 'DisableRealtimeMonitoring'
+    selection_value:
+        CommandLine|contains:
+            - '$true'
+            - ' 1'
+    condition: selection_img and selection_cmd and selection_value
+falsepositives:
+    - Administrators temporarily disabling protection while troubleshooting
+level: high
