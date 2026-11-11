@@ -6,17 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Install sigma-cli and the Splunk and Elasticsearch backends
+      - name: Install sigma-cli and the Splunk backend
         run: |
           pipx install sigma-cli
           sigma plugin install splunk
-          sigma plugin install -f elasticsearch
       - name: Show installed Sigma packages
         run: pipx runpip sigma-cli list | grep -i sigma
-      - name: Show available targets and pipelines
-        run: |
-          sigma list targets
-          sigma list pipelines
       - name: Validate rules (quality gate)
         run: sigma check --fail-on-error --fail-on-issues rules/
       - name: Convert rules to Splunk queries
