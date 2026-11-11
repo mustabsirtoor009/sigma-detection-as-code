@@ -10,7 +10,9 @@ jobs:
         run: |
           pipx install sigma-cli
           sigma plugin install splunk
-          sigma plugin install elasticsearch
+          sigma plugin install -f elasticsearch
+      - name: Show installed Sigma packages
+        run: pipx runpip sigma-cli list | grep -i sigma
       - name: Show available targets and pipelines
         run: |
           sigma list targets
