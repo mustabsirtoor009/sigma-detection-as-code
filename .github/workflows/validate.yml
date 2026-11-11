@@ -15,6 +15,6 @@ jobs:
           sigma list targets
           sigma list pipelines
       - name: Validate rules (quality gate)
-        run: sigma check rules/
+        run: sigma check --fail-on-error --fail-on-issues rules/
       - name: Convert rules to Splunk queries
         run: sigma convert -t splunk -p splunk_windows rules/
