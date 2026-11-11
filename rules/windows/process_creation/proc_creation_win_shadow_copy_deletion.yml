@@ -1,0 +1,30 @@
+title: Volume Shadow Copies Deleted
+id: eb82b7d1-73b3-453c-9063-17e34c4ddc0f
+status: experimental
+description: Detects deletion of volume shadow copies with vssadmin.exe or wmic.exe. Ransomware operators delete shadow copies to stop victims from restoring their files.
+references:
+    - https://attack.mitre.org/techniques/T1490/
+author: mustabsirtoor009
+date: 2026-11-11
+tags:
+    - attack.impact
+    - attack.t1490
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vssadmin:
+        Image|endswith: '\vssadmin.exe'
+        CommandLine|contains|all:
+            - ' delete '
+            - ' shadows'
+    selection_wmic:
+        Image|endswith: '\wmic.exe'
+        CommandLine|contains|all:
+            - 'shadowcopy'
+            - ' delete'
+    condition: 1 of selection_*
+falsepositives:
+    - Backup and disk management tools that clean up shadow copies
+    - Administrators freeing disk space
+level: high
