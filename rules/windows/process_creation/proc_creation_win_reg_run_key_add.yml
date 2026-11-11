@@ -1,0 +1,26 @@
+title: Registry Run Key Added With Reg.exe
+id: 37caa762-da44-4dd4-84f3-767bad8ef186
+status: experimental
+description: Detects reg.exe adding a value under a CurrentVersion Run or RunOnce registry key. Programs in these keys start automatically at logon, so attackers use them for persistence.
+references:
+    - https://attack.mitre.org/techniques/T1547/001/
+author: mustabsirtoor009
+date: 2026-11-11
+tags:
+    - attack.persistence
+    - attack.privilege-escalation
+    - attack.t1547.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\reg.exe'
+    selection_add:
+        CommandLine|contains: ' add '
+    selection_key:
+        CommandLine|contains: '\CurrentVersion\Run'
+    condition: selection_img and selection_add and selection_key
+falsepositives:
+    - Software installers and administrators that register startup programs
+level: medium
